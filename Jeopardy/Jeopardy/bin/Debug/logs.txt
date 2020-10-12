@@ -1,0 +1,7 @@
+10/12/2020 1:53:04 PM: The process cannot access the file 'C:\Users\Patrick\source\repos\Jeopardy\Jeopardy\bin\Debug\questions.csv' because it is being used by another process.
+10/12/2020 1:53:04 PM:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   at Jeopardy.FrmJeopardy.InitializeGame(String strFilename) in C:\Users\Patrick\source\repos\Jeopardy\Jeopardy\FrmJeopardy.cs:line 224
+10/12/2020 1:53:04 PM: Void WinIOError(Int32, System.String)
+
