@@ -70,6 +70,7 @@
     <Compile Include="FrmQuestion.Designer.cs">
       <DependentUpon>FrmQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlaySound.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmAnswer.resx">
@@ -92,6 +93,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -105,6 +107,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Media\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Daily Double.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Jeopardy! Time%27s Up.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\JeopardyMain.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Wrong Buzzer Sound Effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Buzzed.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Correct.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\media\Intro.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

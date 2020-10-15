@@ -21,6 +21,7 @@
  */
 using System;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Jeopardy
 {
@@ -58,6 +59,7 @@ namespace Jeopardy
         {
             if (!(string.IsNullOrWhiteSpace(txtFirst.Text)) && !(string.IsNullOrWhiteSpace(txtSecond.Text)))
             {
+                PlaySound.PlaySounds(Properties.Resources.Intro);
                 teamOne = new Team(txtFirst.Text, 0);
                 teamTwo = new Team(txtSecond.Text, 0);
                 txtFirst.Clear();

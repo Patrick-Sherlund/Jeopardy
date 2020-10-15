@@ -32,6 +32,7 @@ namespace Jeopardy
         {
             this.components = new System.ComponentModel.Container();
             this.grpButtons = new System.Windows.Forms.GroupBox();
+            this.btnNoGuess = new System.Windows.Forms.Button();
             this.lblTeam2 = new System.Windows.Forms.Label();
             this.lblTeam1 = new System.Windows.Forms.Label();
             this.btnShowAnswer = new System.Windows.Forms.Button();
@@ -48,35 +49,47 @@ namespace Jeopardy
             // 
             // grpButtons
             // 
+            this.grpButtons.Controls.Add(this.btnNoGuess);
             this.grpButtons.Controls.Add(this.lblTeam2);
             this.grpButtons.Controls.Add(this.lblTeam1);
             this.grpButtons.Controls.Add(this.btnShowAnswer);
             this.grpButtons.Controls.Add(this.btnIncorrect);
             this.grpButtons.Controls.Add(this.btnCorrect);
-            this.grpButtons.Controls.Add(this.lblTimer);
             this.grpButtons.Location = new System.Drawing.Point(12, 443);
             this.grpButtons.Name = "grpButtons";
             this.grpButtons.Size = new System.Drawing.Size(859, 118);
             this.grpButtons.TabIndex = 4;
             this.grpButtons.TabStop = false;
             // 
+            // btnNoGuess
+            // 
+            this.btnNoGuess.Enabled = false;
+            this.btnNoGuess.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNoGuess.Location = new System.Drawing.Point(436, 10);
+            this.btnNoGuess.Name = "btnNoGuess";
+            this.btnNoGuess.Size = new System.Drawing.Size(212, 32);
+            this.btnNoGuess.TabIndex = 6;
+            this.btnNoGuess.Text = "No Guess";
+            this.btnNoGuess.UseVisualStyleBackColor = true;
+            this.btnNoGuess.Click += new System.EventHandler(this.btnNoGuess_Click);
+            // 
             // lblTeam2
             // 
             this.lblTeam2.AutoSize = true;
-            this.lblTeam2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTeam2.Location = new System.Drawing.Point(678, 16);
+            this.lblTeam2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTeam2.Location = new System.Drawing.Point(652, 16);
             this.lblTeam2.Name = "lblTeam2";
-            this.lblTeam2.Size = new System.Drawing.Size(165, 60);
+            this.lblTeam2.Size = new System.Drawing.Size(180, 60);
             this.lblTeam2.TabIndex = 5;
             this.lblTeam2.Text = "Team 2:\r\nPress \'p\' to buzz!";
             // 
             // lblTeam1
             // 
             this.lblTeam1.AutoSize = true;
-            this.lblTeam1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTeam1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTeam1.Location = new System.Drawing.Point(6, 16);
             this.lblTeam1.Name = "lblTeam1";
-            this.lblTeam1.Size = new System.Drawing.Size(165, 60);
+            this.lblTeam1.Size = new System.Drawing.Size(180, 60);
             this.lblTeam1.TabIndex = 4;
             this.lblTeam1.Text = "Team 1:\r\nPress \'q\' to buzz!";
             // 
@@ -86,7 +99,7 @@ namespace Jeopardy
             this.btnShowAnswer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowAnswer.Location = new System.Drawing.Point(222, 10);
             this.btnShowAnswer.Name = "btnShowAnswer";
-            this.btnShowAnswer.Size = new System.Drawing.Size(426, 32);
+            this.btnShowAnswer.Size = new System.Drawing.Size(212, 32);
             this.btnShowAnswer.TabIndex = 3;
             this.btnShowAnswer.Text = "Show Answer";
             this.btnShowAnswer.UseVisualStyleBackColor = true;
@@ -121,17 +134,19 @@ namespace Jeopardy
             // lblTimer
             // 
             this.lblTimer.AutoSize = true;
-            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Font = new System.Drawing.Font("Segoe UI", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimer.ForeColor = System.Drawing.Color.Tomato;
-            this.lblTimer.Location = new System.Drawing.Point(671, 80);
+            this.lblTimer.Location = new System.Drawing.Point(709, 0);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(0, 31);
+            this.lblTimer.Size = new System.Drawing.Size(150, 37);
             this.lblTimer.TabIndex = 0;
+            this.lblTimer.Text = "Time: 30.0";
             // 
             // grpQuestion
             // 
             this.grpQuestion.Controls.Add(this.txtTeam);
             this.grpQuestion.Controls.Add(this.txtQuestion);
+            this.grpQuestion.Controls.Add(this.lblTimer);
             this.grpQuestion.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpQuestion.Location = new System.Drawing.Point(12, 12);
             this.grpQuestion.Name = "grpQuestion";
@@ -142,10 +157,11 @@ namespace Jeopardy
             // 
             // txtTeam
             // 
+            this.txtTeam.BackColor = this.txtTeam.BackColor;
             this.txtTeam.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txtTeam.Enabled = false;
             this.txtTeam.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTeam.ForeColor = System.Drawing.Color.DarkRed;
+            this.txtTeam.ForeColor = this.txtTeam.ForeColor;
             this.txtTeam.Location = new System.Drawing.Point(6, 355);
             this.txtTeam.Multiline = true;
             this.txtTeam.Name = "txtTeam";
@@ -154,24 +170,22 @@ namespace Jeopardy
             this.txtTeam.TabIndex = 1;
             this.txtTeam.TabStop = false;
             this.txtTeam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtTeam.BackColor = this.txtTeam.BackColor;
-            this.txtTeam.ForeColor = this.txtTeam.ForeColor;
             // 
             // txtQuestion
             // 
+            this.txtQuestion.BackColor = this.txtQuestion.BackColor;
             this.txtQuestion.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.txtQuestion.Enabled = false;
-            this.txtQuestion.ReadOnly = true;
-            this.txtQuestion.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuestion.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuestion.ForeColor = this.txtTeam.ForeColor;
             this.txtQuestion.Location = new System.Drawing.Point(6, 37);
             this.txtQuestion.Multiline = true;
             this.txtQuestion.Name = "txtQuestion";
+            this.txtQuestion.ReadOnly = true;
+            this.txtQuestion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtQuestion.Size = new System.Drawing.Size(847, 312);
             this.txtQuestion.TabIndex = 0;
             this.txtQuestion.TabStop = false;
-            this.txtQuestion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtQuestion.BackColor = this.txtQuestion.BackColor;
-            this.txtQuestion.ForeColor = this.txtTeam.ForeColor;
+            this.txtQuestion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
             // 
             // tmrMain
             // 
@@ -189,7 +203,8 @@ namespace Jeopardy
             this.Name = "FrmQuestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Jeopardy!";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmQuestion_KeyDown);
+            this.Load += new System.EventHandler(this.FrmQuestion_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
             this.grpButtons.ResumeLayout(false);
             this.grpButtons.PerformLayout();
             this.grpQuestion.ResumeLayout(false);
@@ -211,5 +226,6 @@ namespace Jeopardy
         private System.Windows.Forms.TextBox txtQuestion;
         private System.Windows.Forms.Timer tmrMain;
         private System.Windows.Forms.TextBox txtTeam;
+        private System.Windows.Forms.Button btnNoGuess;
     }
 }

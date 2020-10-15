@@ -68,6 +68,7 @@ namespace Jeopardy
         public static string strAnswer { get; private set; } = "Null";
         public static string strQuestion { get; private set; } = "Null";
         public static int intPointValue { get; private set; } = 0;
+        public static bool bolIsRotated { get; private set; } = false;
         #endregion
         #region Class Fields
         public static int intGameCount = 0;
@@ -88,6 +89,7 @@ namespace Jeopardy
         private const string strDOUBLE_JEOPARDY = "Double Jeopardy Question!";
         private const string strDOUBLE_TITLE = "Double Jeopardy";
         private const string strDOUBLE = "Double";
+        private const string strTEAM = "Team: ";
         #endregion
 
         /// <summary>
@@ -140,10 +142,11 @@ namespace Jeopardy
         /// <returns>Returns a (string)strQuestion which is the question found by comparing category and points inside
         /// the list of Jeopardy structs.
         /// </returns>
-        private string GetQuestion(string strCategory, int intPoint, bool bolDblJep)
+        private string GetQuestion(string strCategory, int intPoint, bool bolDblJep, bool bolisRotated)
         {
             List<Jeopardy> TempList = new List<Jeopardy>();
             Random rndMain = new Random();
+            string strOutput;
             int intRandomNumber = 0;
 
             if (bolDblJep)
@@ -162,8 +165,9 @@ namespace Jeopardy
             intRandomNumber = rndMain.Next(0, TempList.Count - 1);
             strAnswer = TempList[intRandomNumber].strAnswer;
             strQuestion = TempList[intRandomNumber].strQuestion;
+            strOutput = (bolisRotated) ? strAnswer : strQuestion;
 
-            return strQuestion;
+            return strOutput;
         }
         /// <summary>
         /// This method is used to set Three random Jeopardy buttons to be "Double Jeopardy" buttons.
@@ -318,8 +322,8 @@ namespace Jeopardy
         {
             Teams.Add(teamOne);
             Teams.Add(teamTwo);
-            grpTeam1.Text = teamOne.strName;
-            grpTeam2.Text = teamTwo.strName;
+            grpTeam1.Text = strTEAM + teamOne.strName;
+            grpTeam2.Text = strTEAM + teamTwo.strName;
 
             lblTeam1.Text = strTOTAL_POINTS + teamOne.intPoints;
             lblTeam2.Text = strTOTAL_POINTS + teamTwo.intPoints;
@@ -342,15 +346,25 @@ namespace Jeopardy
 
                 if (btnCurrent.Tag != null && (string)btnCurrent.Tag == "Double")
                 {
+                    PlaySound.PlaySounds(Properties.Resources.DailyDouble);
                     intPointValue *= intDblJeopardyMultiplier;
                     bolDblJeopardy = true;
-                    MessageBox.Show(strDOUBLE_JEOPARDY, strDOUBLE_TITLE,
-                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    if(MessageBox.Show(strDOUBLE_JEOPARDY, strDOUBLE_TITLE,
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    {
+                        if (PlaySound.spMain != null) PlaySound.spMain.Stop();
+                        btnCurrent.Enabled = false;
+                        frmQuestion.InitializeQuestion(GetQuestion(strCategory, intPointValue, bolDblJeopardy, bolIsRotated));
+                        frmQuestion.Show();
+                    }
+                }
+                else
+                {
+                    btnCurrent.Enabled = false;
+                    frmQuestion.InitializeQuestion(GetQuestion(strCategory, intPointValue, bolDblJeopardy, bolIsRotated));
+                    frmQuestion.Show();
                 }
 
-                btnCurrent.Enabled = false;
-                frmQuestion.InitializeQuestion(GetQuestion(strCategory, intPointValue, bolDblJeopardy));
-                frmQuestion.Show();
             }
         }
         /// <summary>
@@ -388,5 +402,22 @@ namespace Jeopardy
                 Application.Exit();
             }
         }
+
+        private void lblRotate_Click(object sender, EventArgs e)
+        {
+            if (lblRotate.Text == "Q to A")
+            {
+                lblRotate.Text = "A to Q";
+                bolIsRotated = false;
+            }
+            else
+            {
+                lblRotate.Text = "Q to A";
+                bolIsRotated = true;
+            }
+
+
+        }
+
     }
 }
