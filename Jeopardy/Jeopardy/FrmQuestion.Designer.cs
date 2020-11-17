@@ -43,6 +43,7 @@ namespace Jeopardy
             this.txtTeam = new System.Windows.Forms.TextBox();
             this.txtQuestion = new System.Windows.Forms.TextBox();
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
+            this.tmrPlayer = new System.Windows.Forms.Timer(this.components);
             this.grpButtons.SuspendLayout();
             this.grpQuestion.SuspendLayout();
             this.SuspendLayout();
@@ -191,6 +192,10 @@ namespace Jeopardy
             // 
             this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
             // 
+            // tmrPlayer
+            // 
+            this.tmrPlayer.Tick += new System.EventHandler(this.tmrPlayer_Tick);
+            // 
             // FrmQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,5 +232,6 @@ namespace Jeopardy
         private System.Windows.Forms.Timer tmrMain;
         private System.Windows.Forms.TextBox txtTeam;
         private System.Windows.Forms.Button btnNoGuess;
+        private System.Windows.Forms.Timer tmrPlayer;
     }
 }

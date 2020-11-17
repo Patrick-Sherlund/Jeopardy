@@ -23,6 +23,7 @@ namespace Jeopardy
         private const string strSUBTRACT = "Subtract";
         private const string strADD = "Add";
         private const decimal decTIME_SECONDS = 30.0m;
+        private const decimal decTIME_PLAYER = 15.0m;
         private static decimal decCurrent_Time = 0.0m;
         private static int intCurrentTeam = 2;
 
@@ -38,6 +39,8 @@ namespace Jeopardy
         private void Buzzer(int intTeam)
         {
             tmrMain.Stop();
+            tmrPlayer.Start();
+            decCurrent_Time = decTIME_PLAYER;
             PlaySound.PlaySounds(Properties.Resources.Buzzed);
             intCurrentTeam = intTeam;
             txtTeam.Text = string.Format(strBUZZED, FrmJeopardy.Teams[intTeam].strName);
@@ -164,6 +167,7 @@ namespace Jeopardy
         {
             FrmAnswer frmAnswer;
             tmrMain.Stop();
+            tmrPlayer.Stop();
             strAnswer = FrmJeopardy.strAnswer;
             strQuestion = FrmJeopardy.strQuestion;
             if (intCurrentTeam != 2)
@@ -184,5 +188,18 @@ namespace Jeopardy
             tmrMain.Start();
         }
 
+        private void tmrPlayer_Tick(object sender, EventArgs e)
+        {
+            decCurrent_Time -= .1m;
+            lblTimer.Text = strTIMER + decCurrent_Time.ToString();
+
+            if (decCurrent_Time == 0)
+            {
+                tmrPlayer.Stop();
+                PlaySound.PlaySounds(Properties.Resources.TimesUp);
+                MessageBox.Show(strTIMERS_UP, strTIMERS_UP, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                btnShowAnswer.Focus();
+            }
+        }
     }
 }
